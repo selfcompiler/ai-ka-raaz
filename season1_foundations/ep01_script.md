@@ -24,18 +24,18 @@
 ---
 
 ### 🔍 THE MYSTERY (0:30 - 2:00)
-*(Show phone screen with WhatsApp open)*
+*(Open Google.com in browser — LIVE screen recording)*
 
 **Narration:**
-> "Ek kaam karo. Apna phone uthao. WhatsApp kholo. Kisi bhi chat mein type karo: **'Main aaj'**..."
+> "Ek kaam karo. Google kholo. Search bar mein type karo: **'How to'**..."
 >
-> *(Show keyboard autocomplete suggesting words)*
+> *(Type slowly — show Google autocomplete suggestions appearing)*
 >
-> "Dekha? Phone ne suggest kiya — 'ghar', 'office', 'kha raha hoon'."
+> "Dekha? Google ne suggest kiya — 'How to learn Python', 'How to make money', 'How to lose weight'."
 >
-> "Kaise pata chala phone ko? Kya phone SOCH raha hai?"
+> "Kaise pata chala Google ko? Kya Google SOCH raha hai?"
 >
-> "Nahi yaar. Phone ne MILLIONS of messages dekhe hain. Usne ek pattern seekha hai — log 'Main aaj' ke baad usually **kya** likhte hain."
+> "Nahi yaar. Google ne BILLIONS of searches dekhe hain. Usne ek pattern seekha hai — log 'How to' ke baad usually **kya** likhte hain."
 >
 > *(Lean forward. Dramatic whisper.)*
 >
