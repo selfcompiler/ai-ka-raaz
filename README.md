@@ -38,15 +38,6 @@ pip install torch
 python3 season1_foundations/ep01_ai_thinks.py
 ```
 
-## Deep Dive Scripts
-Want to go deeper? These standalone scripts cover each concept in detail:
-- `bigram_lm.py` — Your first language model from scratch
-- `tokenization_deep_dive.py` — Character, Word & BPE tokenization
-- `embeddings_deep_dive.py` — Word embeddings & positional encoding
-- `cosine_similarity_explained.py` — How AI measures similarity
-- `self_attention_deep_dive.py` — Attention mechanism internals
-- `mini_gpt.py` — Full GPT model (~10M parameters)
-
 ## YouTube Channel
 [Coming soon]
 
