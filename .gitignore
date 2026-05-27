@@ -1,0 +1,7 @@
+venv_manim/
+animations/media/
+__pycache__/
+*.pyc
+.DS_Store
+.claude/
+*.png

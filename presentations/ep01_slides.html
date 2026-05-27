@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EP01: AI Sochta Kaise Hai?</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0a;
+    color: #fff;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .slide {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 60px;
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+  }
+  .slide.active { display: flex; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulseGlow {
+    0%, 100% { text-shadow: 0 0 20px rgba(255,204,0,0.3); }
+    50% { text-shadow: 0 0 40px rgba(255,204,0,0.6); }
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes typewriter {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+
+  h1 {
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+  h2 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+  .subtitle {
+    font-size: 1.6rem;
+    color: #888;
+    margin-top: 10px;
+  }
+  .big-text {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #ffcc00;
+    animation: pulseGlow 2s infinite;
+    margin: 30px 0;
+  }
+  .highlight { color: #ffcc00; }
+  .green { color: #4caf50; }
+  .red { color: #ff4444; }
+  .blue { color: #42a5f5; }
+  .purple { color: #ab47bc; }
+  .gray { color: #666; }
+  .dim { color: #555; }
+
+  .reveal-item {
+    opacity: 0;
+    animation: slideUp 0.5s ease forwards;
+  }
+  .reveal-item:nth-child(1) { animation-delay: 0s; }
+  .reveal-item:nth-child(2) { animation-delay: 0.3s; }
+  .reveal-item:nth-child(3) { animation-delay: 0.6s; }
+  .reveal-item:nth-child(4) { animation-delay: 0.9s; }
+  .reveal-item:nth-child(5) { animation-delay: 1.2s; }
+
+  .phone-box {
+    background: #1a1a2e;
+    border: 2px solid #333;
+    border-radius: 20px;
+    padding: 30px 40px;
+    margin: 20px 0;
+    max-width: 500px;
+  }
+  .typed-text {
+    font-size: 2rem;
+    text-align: left;
+    margin-bottom: 15px;
+    color: #fff;
+  }
+  .suggestions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .suggestion {
+    background: #2a2a4a;
+    border: 1px solid #4caf50;
+    color: #4caf50;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 1.2rem;
+  }
+
+  .pattern-box {
+    background: #111;
+    border-left: 4px solid #ffcc00;
+    padding: 20px 30px;
+    margin: 10px 0;
+    text-align: left;
+    font-size: 1.5rem;
+    border-radius: 0 8px 8px 0;
+  }
+  .pattern-box .arrow { color: #ffcc00; margin: 0 10px; }
+
+  .comparison-table {
+    border-collapse: collapse;
+    margin: 30px 0;
+    font-size: 1.3rem;
+  }
+  .comparison-table th, .comparison-table td {
+    padding: 14px 30px;
+    border: 1px solid #333;
+    text-align: center;
+  }
+  .comparison-table th {
+    background: #1a1a2e;
+    color: #ffcc00;
+    font-weight: 700;
+  }
+  .comparison-table td:first-child {
+    text-align: left;
+    color: #888;
+  }
+
+  .circle-compare {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    margin: 30px 0;
+  }
+  .circle-item { text-align: center; }
+  .circle-small {
+    width: 60px; height: 60px;
+    background: #42a5f5;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    opacity: 0.8;
+  }
+  .circle-big {
+    width: 220px; height: 220px;
+    background: #ff4444;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    opacity: 0.5;
+  }
+
+  .slide-counter {
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    color: #333;
+    font-size: 0.9rem;
+  }
+
+  .logo-row {
+    display: flex;
+    gap: 40px;
+    margin: 20px 0;
+    font-size: 1.5rem;
+  }
+
+  .code-block {
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 25px 35px;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 1.3rem;
+    text-align: left;
+    line-height: 1.8;
+    margin: 20px 0;
+  }
+  .code-block .comment { color: #666; }
+  .code-block .string { color: #4caf50; }
+  .code-block .keyword { color: #42a5f5; }
+
+  .next-ep {
+    margin-top: 40px;
+    padding: 20px 40px;
+    border: 2px solid #ff4444;
+    border-radius: 12px;
+    font-size: 1.4rem;
+    color: #ff4444;
+  }
+
+  kbd {
+    background: #222;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 4px 12px;
+    font-size: 0.9em;
+    color: #ccc;
+  }
+  .controls {
+    position: fixed;
+    bottom: 20px;
+    left: 30px;
+    color: #333;
+    font-size: 0.8rem;
+  }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1: Title -->
+<div class="slide active" id="s1">
+  <h1>AI Sochta <span class="highlight">Kaise</span> Hai?</h1>
+  <p class="subtitle">Episode 1 &nbsp;|&nbsp; AI Ka Raaz</p>
+  <p class="subtitle dim" style="margin-top: 30px;">Kya AI ke andar koi brain hai?</p>
+</div>
+
+<!-- SLIDE 2: The Question -->
+<div class="slide" id="s2">
+  <h2>Ek machine hai jo...</h2>
+  <div style="margin: 30px 0; font-size: 1.6rem; line-height: 2.2;">
+    <div class="reveal-item">Shakespeare likh sakti hai...</div>
+    <div class="reveal-item">Jokes maar sakti hai...</div>
+    <div class="reveal-item">Code likh sakti hai...</div>
+    <div class="reveal-item">Interviews de sakti hai...</div>
+  </div>
+  <div class="reveal-item" style="margin-top: 20px;">
+    <span style="font-size: 2rem; color: #ff4444;">Lekin kya woh SOCH rahi hai?</span>
+  </div>
+</div>
+
+<!-- SLIDE 3: Answer -->
+<div class="slide" id="s3">
+  <h1 class="red" style="font-size: 5rem;">NAHI.</h1>
+  <p style="font-size: 2rem; margin-top: 20px; color: #888;">Bilkul nahi.</p>
+</div>
+
+<!-- SLIDE 4: Phone Autocomplete -->
+<div class="slide" id="s4">
+  <h2>Phone ka Autocomplete</h2>
+  <div class="phone-box">
+    <div class="typed-text">Main aaj<span class="highlight" style="animation: pulseGlow 1s infinite;">|</span></div>
+    <div class="suggestions">
+      <span class="suggestion reveal-item">ghar</span>
+      <span class="suggestion reveal-item">office</span>
+      <span class="suggestion reveal-item">kha raha hoon</span>
+    </div>
+  </div>
+  <p style="margin-top: 30px; font-size: 1.4rem; color: #888;">
+    Phone ne MILLIONS of messages dekhe hain.<br>
+    Usne ek <span class="highlight">pattern</span> seekha hai.
+  </p>
+</div>
+
+<!-- SLIDE 5: Yahi AI Hai -->
+<div class="slide" id="s5">
+  <h2 style="color: #888;">Guys...</h2>
+  <div class="big-text">YAHI AI HAI.</div>
+  <p style="font-size: 1.8rem;">Bas... bohot <span class="highlight">BADE</span> scale pe.</p>
+</div>
+
+<!-- SLIDE 6: All AI models -->
+<div class="slide" id="s6">
+  <div class="logo-row">
+    <span class="green reveal-item">ChatGPT</span>
+    <span class="purple reveal-item">Claude</span>
+    <span class="blue reveal-item">Gemini</span>
+  </div>
+  <p style="font-size: 1.5rem; color: #888; margin: 20px 0;">Sab ek hi kaam kar rahe hain:</p>
+  <div class="big-text">NEXT WORD KYA HOGA?</div>
+  <p style="font-size: 1.6rem;">Bas. <span class="highlight">Prediction.</span> That's it.</p>
+</div>
+
+<!-- SLIDE 7: Live Demo Intro -->
+<div class="slide" id="s7">
+  <h2>Believe nahi ho raha?</h2>
+  <p style="font-size: 1.8rem; margin: 30px 0;">Main abhi... <span class="highlight">LIVE</span>... tumhare saamne...</p>
+  <p style="font-size: 2.2rem; color: #4caf50;">ek AI banaunga.</p>
+  <p style="font-size: 1.2rem; color: #666; margin-top: 20px;">Sirf 30 lines of code!</p>
+</div>
+
+<!-- SLIDE 8: Switch to terminal -->
+<div class="slide" id="s8">
+  <div class="code-block" style="max-width: 700px;">
+    <span class="comment"># ep01_ai_thinks.py</span><br>
+    <span class="keyword">class</span> TinyAI:<br>
+    &nbsp;&nbsp;table = <span class="string">[65 x 65 numbers]</span><br><br>
+    <span class="comment"># Sirf EK line ka concept:</span><br>
+    next_char = table[<span class="string">current_char</span>]<br><br>
+    <span class="comment"># Bas. Yahi hai AI.</span>
+  </div>
+  <p style="font-size: 1.2rem; color: #888; margin-top: 20px;">
+    (Ab terminal pe chalte hain... <kbd>→</kbd>)
+  </p>
+</div>
+
+<!-- SLIDE 9: Before vs After (show after terminal demo) -->
+<div class="slide" id="s9">
+  <h2>Training ka Jaadu</h2>
+  <div style="display: flex; gap: 40px; margin: 30px 0;">
+    <div style="flex: 1;">
+      <h3 class="red" style="margin-bottom: 15px;">BEFORE Training</h3>
+      <div class="code-block" style="color: #ff4444; font-size: 1.1rem;">
+        xqzjjj bYRGkF?b;<br>
+        CbwhtERCIfuWr,Dz<br>
+        JERjhLlVaF&amp;Ejff
+      </div>
+      <p style="color: #888;">Gibberish! Random!</p>
+    </div>
+    <div style="flex: 1;">
+      <h3 class="green" style="margin-bottom: 15px;">AFTER Training</h3>
+      <div class="code-block" style="color: #4caf50; font-size: 1.1rem;">
+        The king shall not<br>
+        My lord, I pray thee<br>
+        What is your name?
+      </div>
+      <p style="color: #4caf50;">Shakespeare jaisa!</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 10: What did AI learn? -->
+<div class="slide" id="s10">
+  <h2>AI ne kya seekha?</h2>
+  <div style="margin: 30px 0;">
+    <div class="pattern-box reveal-item">
+      <span class="highlight">'T'</span> <span class="arrow">→</span> <span class="green">'h'</span> (43% chance)
+    </div>
+    <div class="pattern-box reveal-item">
+      <span class="highlight">'Th'</span> <span class="arrow">→</span> <span class="green">'e'</span> (65% chance)
+    </div>
+    <div class="pattern-box reveal-item">
+      <span class="highlight">'The'</span> <span class="arrow">→</span> <span class="green">' '</span> (80% chance)
+    </div>
+  </div>
+  <p class="big-text" style="font-size: 2.5rem;">Pattern. Bas Pattern.</p>
+</div>
+
+<!-- SLIDE 11: The Twist — Comparison -->
+<div class="slide" id="s11">
+  <h2>ChatGPT BHI <span class="highlight">exactly</span> yahi karta hai</h2>
+  <table class="comparison-table">
+    <tr>
+      <th></th>
+      <th class="blue">Humara Model</th>
+      <th class="red">GPT-4</th>
+    </tr>
+    <tr>
+      <td>Parameters</td>
+      <td>4,225</td>
+      <td>1,800,000,000,000</td>
+    </tr>
+    <tr>
+      <td>Training Data</td>
+      <td>1 MB</td>
+      <td>13,000,000 MB</td>
+    </tr>
+    <tr>
+      <td>Training Time</td>
+      <td>5 seconds</td>
+      <td>~3 months</td>
+    </tr>
+    <tr>
+      <td>Concept</td>
+      <td class="green">SAME ✓</td>
+      <td class="green">SAME ✓</td>
+    </tr>
+  </table>
+</div>
+
+<!-- SLIDE 12: Scale Visual -->
+<div class="slide" id="s12">
+  <h2>Same concept. Fark sirf <span class="highlight">SIZE</span> ka hai.</h2>
+  <div class="circle-compare">
+    <div class="circle-item reveal-item">
+      <div class="circle-small"></div>
+      <p class="blue">Humara Model</p>
+      <p class="dim">Cycle 🚲</p>
+    </div>
+    <div class="circle-item reveal-item">
+      <div class="circle-big"></div>
+      <p class="red">GPT-4</p>
+      <p class="dim">Rocket 🚀</p>
+    </div>
+  </div>
+  <p style="font-size: 1.4rem; color: #888;">Dono <span class="green">wheels</span> pe chalte hain. Same physics.</p>
+</div>
+
+<!-- SLIDE 13: Cliffhanger -->
+<div class="slide" id="s13">
+  <h2>Lekin ek problem hai...</h2>
+  <div style="margin: 30px 0; font-size: 1.5rem; line-height: 2;">
+    <div class="reveal-item"><span class="highlight">cat</span> = number 42</div>
+    <div class="reveal-item"><span class="highlight">dog</span> = number 51</div>
+    <div class="reveal-item"><span class="highlight">rocket</span> = number 89</div>
+  </div>
+  <p class="reveal-item" style="font-size: 1.4rem; margin-top: 20px;">
+    <span class="green">cat</span> aur <span class="green">dog</span> SIMILAR hain... lekin
+    <span class="red">cat</span> aur <span class="red">rocket</span> nahi.
+  </p>
+  <p class="reveal-item" style="font-size: 1.6rem; margin-top: 15px; color: #ffcc00;">
+    Computer ko yeh kaise samjhaye?
+  </p>
+</div>
+
+<!-- SLIDE 14: Next Episode -->
+<div class="slide" id="s14">
+  <p style="font-size: 1.5rem; color: #888;">Yeh raaz...</p>
+  <div class="next-ep">
+    Episode 2: Computer Ko Hindi Kaise Sikhaye?
+  </div>
+  <p style="font-size: 1.2rem; color: #666; margin-top: 30px;">AI Ka Raaz &nbsp;|&nbsp; Season 1</p>
+</div>
+
+<!-- SLIDE 15: Key Takeaway -->
+<div class="slide" id="s15">
+  <h2 style="color: #888; font-size: 1.5rem; margin-bottom: 20px;">KEY TAKEAWAY</h2>
+  <div class="big-text" style="font-size: 2.8rem; line-height: 1.4;">
+    AI = Next Token Prediction
+  </div>
+  <p style="font-size: 1.6rem; margin-top: 20px;">
+    It doesn't <span class="red">think</span>.
+    It <span class="green">predicts patterns</span>.
+    That's it.
+  </p>
+</div>
+
+<div class="slide-counter" id="counter">1 / 15</div>
+<div class="controls"><kbd>←</kbd> <kbd>→</kbd> to navigate</div>
+
+<script>
+  let current = 0;
+  const slides = document.querySelectorAll('.slide');
+  const counter = document.getElementById('counter');
+  const total = slides.length;
+
+  function showSlide(n) {
+    slides[current].classList.remove('active');
+    current = (n + total) % total;
+    slides[current].classList.remove('active');
+    void slides[current].offsetWidth; // restart animations
+    slides[current].classList.add('active');
+    counter.textContent = `${current + 1} / ${total}`;
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') showSlide(current + 1);
+    if (e.key === 'ArrowLeft') showSlide(current - 1);
+    if (e.key === 'f') document.documentElement.requestFullscreen();
+  });
+
+  document.addEventListener('click', () => showSlide(current + 1));
+</script>
+</body>
+</html>
