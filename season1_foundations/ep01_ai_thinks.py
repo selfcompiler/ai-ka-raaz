@@ -151,20 +151,3 @@ with torch.no_grad():
         predictions = [f"'{itos[i.item()]}' ({p.item():.0%})" for p, i in zip(top.values, top.indices)]
         display = ch if ch != ' ' else '␣'
         print(f"  '{display}' ke baad → {', '.join(predictions)}")
-
-# ============================================================
-# STEP 7: The Big Comparison
-# ============================================================
-input("\n👉 Step 7: Ab asli twist... [ENTER]")
-
-print("\n" + "─" * 60)
-print("💡 KEY INSIGHT:")
-print("─" * 60)
-print(f"   ChatGPT BHI yahi karta hai — NEXT token predict karo.")
-print(f"   Bas scale alag hai:")
-print(f"")
-print(f"   • Humara model:  {n_params:,} parameters")
-print(f"   • GPT-4:         1,800,000,000,000 parameters")
-print(f"")
-print(f"   Same concept. Fark sirf SIZE ka hai! 🚀")
-print("─" * 60)
