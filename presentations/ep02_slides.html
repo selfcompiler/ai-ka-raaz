@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EP02: Computer Ko Hindi Kaise Sikhaye?</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0a;
+    color: #fff;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+  .slide {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 60px;
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+  }
+  .slide.active { display: flex; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulseGlow {
+    0%, 100% { text-shadow: 0 0 20px rgba(255,204,0,0.3); }
+    50% { text-shadow: 0 0 40px rgba(255,204,0,0.6); }
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  h1 { font-size: 4rem; font-weight: 800; margin-bottom: 20px; line-height: 1.2; }
+  h2 { font-size: 2.8rem; font-weight: 700; margin-bottom: 16px; line-height: 1.3; }
+  .subtitle { font-size: 1.6rem; color: #888; margin-top: 10px; }
+  .big-text {
+    font-size: 3.5rem; font-weight: 800; color: #ffcc00;
+    animation: pulseGlow 2s infinite; margin: 30px 0;
+  }
+  .highlight { color: #ffcc00; }
+  .green { color: #4caf50; }
+  .red { color: #ff4444; }
+  .blue { color: #42a5f5; }
+  .gray { color: #666; }
+  .dim { color: #555; }
+  .reveal-item {
+    opacity: 0; animation: slideUp 0.5s ease forwards;
+  }
+  .reveal-item:nth-child(1) { animation-delay: 0s; }
+  .reveal-item:nth-child(2) { animation-delay: 0.3s; }
+  .reveal-item:nth-child(3) { animation-delay: 0.6s; }
+  .reveal-item:nth-child(4) { animation-delay: 0.9s; }
+  .reveal-item:nth-child(5) { animation-delay: 1.2s; }
+
+  .code-box {
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 25px 35px;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 1.3rem;
+    text-align: left;
+    line-height: 1.8;
+    margin: 20px 0;
+  }
+  .secret-nums {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 2.5rem;
+    color: #4caf50;
+    letter-spacing: 3px;
+    margin: 20px 0;
+  }
+  .arrow-flow {
+    font-size: 1.5rem;
+    margin: 15px 0;
+    line-height: 2;
+  }
+  .arrow-flow .arrow { color: #ffcc00; font-size: 1.8rem; }
+  .token-box {
+    display: inline-block;
+    background: #1a1a2e;
+    border: 1px solid #42a5f5;
+    color: #42a5f5;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-family: monospace;
+    font-size: 1.3rem;
+    margin: 3px;
+  }
+  .token-box.merged {
+    border-color: #4caf50;
+    color: #4caf50;
+    background: #0a2e1a;
+  }
+  .bar-chart { text-align: left; margin: 20px 0; }
+  .bar-row { margin: 8px 0; font-size: 1.2rem; }
+  .bar-row .bar {
+    display: inline-block;
+    height: 28px;
+    background: #ff4444;
+    border-radius: 4px;
+    vertical-align: middle;
+    margin-left: 10px;
+  }
+  .bar-row .label { display: inline-block; width: 320px; text-align: right; color: #ccc; }
+  .comparison-table {
+    border-collapse: collapse; margin: 30px 0; font-size: 1.3rem;
+  }
+  .comparison-table th, .comparison-table td {
+    padding: 14px 30px; border: 1px solid #333; text-align: center;
+  }
+  .comparison-table th { background: #1a1a2e; color: #ffcc00; font-weight: 700; }
+  .comparison-table td:first-child { text-align: left; color: #888; }
+  .next-ep {
+    margin-top: 40px; padding: 20px 40px;
+    border: 2px solid #ff4444; border-radius: 12px;
+    font-size: 1.4rem; color: #ff4444;
+  }
+  .slide-counter { position: fixed; bottom: 20px; right: 30px; color: #333; font-size: 0.9rem; }
+  .controls { position: fixed; bottom: 20px; left: 30px; color: #333; font-size: 0.8rem; }
+  kbd {
+    background: #222; border: 1px solid #444; border-radius: 4px;
+    padding: 2px 8px; font-size: 0.9em; color: #ccc;
+  }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1: Title -->
+<div class="slide active" id="s1">
+  <h1>Computer Ko <span class="highlight">Hindi</span> Kaise Sikhaye?</h1>
+  <p class="subtitle">Episode 2 &nbsp;|&nbsp; AI Ka Raaz</p>
+  <p class="subtitle dim" style="margin-top: 30px;">Computer sirf NUMBERS samajhta hai...</p>
+</div>
+
+<!-- SLIDE 2: Secret Message -->
+<div class="slide" id="s2">
+  <h2>Ek Secret Message...</h2>
+  <div class="secret-nums reveal-item">[72, 101, 108, 108, 111]</div>
+  <p style="font-size: 1.6rem; margin: 20px 0; color: #888;" class="reveal-item">Yeh kya hai? Code? Password?</p>
+</div>
+
+<!-- SLIDE 3: Reveal -->
+<div class="slide" id="s3">
+  <h2>Yeh hai...</h2>
+  <div class="big-text">"Hello"</div>
+  <div style="font-size: 1.4rem; color: #888;">
+    <span class="highlight">H</span>=72 &nbsp;
+    <span class="highlight">e</span>=101 &nbsp;
+    <span class="highlight">l</span>=108 &nbsp;
+    <span class="highlight">l</span>=108 &nbsp;
+    <span class="highlight">o</span>=111
+  </div>
+  <p style="margin-top: 30px; font-size: 1.3rem;">
+    EVERY AI model duniya mein <span class="highlight">sabse PEHLE</span> yahi karta hai.
+  </p>
+</div>
+
+<!-- SLIDE 4: What is Tokenization -->
+<div class="slide" id="s4">
+  <h2>TOKENIZATION</h2>
+  <p style="font-size: 1.5rem; color: #888; margin-bottom: 30px;">Token = tukda &nbsp;|&nbsp; Ization = banane ka process</p>
+  <div class="arrow-flow">
+    <div class="reveal-item" style="font-size: 1.8rem;">"Mere paas maa hai"</div>
+    <div class="reveal-item"><span class="arrow">↓</span> <span style="color: #888;">TOKENIZE</span></div>
+    <div class="reveal-item">
+      <span class="token-box">M</span>
+      <span class="token-box">e</span>
+      <span class="token-box">r</span>
+      <span class="token-box">e</span>
+      <span class="token-box">&nbsp;</span>
+      <span class="token-box">p</span>
+      <span class="token-box">a</span>
+      <span class="token-box">a</span>
+      <span class="token-box">s</span>
+      <span class="token-box">...</span>
+    </div>
+    <div class="reveal-item"><span class="arrow">↓</span> <span style="color: #888;">ENCODE</span></div>
+    <div class="reveal-item" style="color: #4caf50; font-family: monospace; font-size: 1.4rem;">
+      [38, 56, 69, 56, 1, 67, 52, 52, 70, ...]
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5: Bollywood Encoding -->
+<div class="slide" id="s5">
+  <h2>Bollywood → Numbers</h2>
+  <div class="code-box" style="max-width: 700px;">
+    <div class="reveal-item" style="margin-bottom: 15px;">
+      <span style="color: #fff;">"Mere paas maa hai"</span><br>
+      <span style="color: #4caf50;">→ [38, 56, 69, 56, 1, 67, 52, 52, 70, 1, 64, 52, 52, 1, 59, 52, 60]</span>
+    </div>
+    <div class="reveal-item" style="margin-bottom: 15px;">
+      <span style="color: #fff;">"Mogambo khush hua"</span><br>
+      <span style="color: #4caf50;">→ [38, 66, 58, 52, 64, 53, 66, 1, 62, 59, 72, 70, 59, 1, 59, 72, 52]</span>
+    </div>
+    <div class="reveal-item">
+      <span style="color: #fff;">"Kitne aadmi the"</span><br>
+      <span style="color: #4caf50;">→ [36, 60, 71, 65, 56, 1, 52, 52, 55, 64, 60, 1, 71, 59, 56]</span>
+    </div>
+  </div>
+  <p style="font-size: 1.2rem; color: #888; margin-top: 10px;">Har character ka ek number. Perfectly reversible!</p>
+</div>
+
+<!-- SLIDE 6: Decode -->
+<div class="slide" id="s6">
+  <h2>Decode: Numbers → Text</h2>
+  <div class="secret-nums" style="font-size: 1.8rem;">[36, 60, 71, 65, 56, 1, 52, 52, 55, 64, 60, 1, 71, 59, 56]</div>
+  <div style="font-size: 2rem; margin: 15px 0;"><span class="arrow-flow"><span class="arrow">↓</span></span></div>
+  <div class="big-text" style="font-size: 3rem;">"Kitne aadmi the"</div>
+  <p style="font-size: 1.3rem; color: #4caf50;">✅ Numbers → Text → Numbers. Works both ways!</p>
+</div>
+
+<!-- SLIDE 7: Switch to Code Demo -->
+<div class="slide" id="s7">
+  <h2>LIVE Demo</h2>
+  <p style="font-size: 1.8rem; margin: 30px 0;">Ab dekhte hain <span class="highlight">code</span> mein...</p>
+  <p style="font-size: 1.2rem; color: #888;">(Switch to PyCharm → Run ep02_tokenization.py)</p>
+</div>
+
+<!-- SLIDE 8: The Problem -->
+<div class="slide" id="s8">
+  <h2>Problem: <span class="red">Bohot Zyada Tokens!</span></h2>
+  <div class="bar-chart">
+    <div class="bar-row reveal-item">
+      <span class="label">"Namaste"</span>
+      <span class="bar" style="width: 70px;"></span>
+      <span style="color:#ff4444;"> 7 tokens</span>
+    </div>
+    <div class="bar-row reveal-item">
+      <span class="label">"Mogambo khush hua"</span>
+      <span class="bar" style="width: 180px;"></span>
+      <span style="color:#ff4444;"> 18 tokens</span>
+    </div>
+    <div class="bar-row reveal-item">
+      <span class="label">"Rishte mein toh hum tumhare..."</span>
+      <span class="bar" style="width: 430px;"></span>
+      <span style="color:#ff4444;"> 43 tokens!</span>
+    </div>
+  </div>
+  <p class="reveal-item" style="font-size: 1.4rem; margin-top: 30px;">
+    😱 ChatGPT limit: ~4000 tokens<br>
+    <span class="red">Character level pe ek paragraph = limit KHATAM!</span>
+  </p>
+</div>
+
+<!-- SLIDE 9: BPE Introduction -->
+<div class="slide" id="s9">
+  <h2>Solution: <span class="green">BPE</span></h2>
+  <p style="font-size: 1.5rem; color: #888; margin-bottom: 10px;">Byte Pair Encoding</p>
+  <p style="font-size: 1.6rem; margin: 30px 0;">
+    Idea: Jo characters <span class="highlight">BAAR BAAR</span> saath aate hain,<br>
+    unhe <span class="green">merge</span> kar do!
+  </p>
+</div>
+
+<!-- SLIDE 10: BPE Steps -->
+<div class="slide" id="s10">
+  <h2>BPE: Step by Step</h2>
+  <div style="text-align: left; margin: 20px 0; font-size: 1.4rem; line-height: 2.2;">
+    <div class="reveal-item">
+      Step 1: <span class="token-box">m</span> + <span class="token-box">e</span> → <span class="token-box merged">me</span>
+      <span class="gray">(found 3x)</span>
+    </div>
+    <div class="reveal-item">
+      Step 2: <span class="token-box merged">me</span> + <span class="token-box">r</span> → <span class="token-box merged">mer</span>
+      <span class="gray">(found 3x)</span>
+    </div>
+    <div class="reveal-item">
+      Step 3: <span class="token-box merged">mer</span> + <span class="token-box">a</span> → <span class="token-box merged">mera</span>
+      <span class="gray">(found 3x)</span>
+    </div>
+    <div class="reveal-item">
+      Step 4: <span class="token-box">a</span> + <span class="token-box">a</span> → <span class="token-box merged">aa</span>
+      <span class="gray">(found 3x)</span>
+    </div>
+  </div>
+  <p class="reveal-item" style="font-size: 1.3rem; margin-top: 15px;">
+    Ab <span class="highlight">"mera"</span> = 4 characters lekin <span class="green">1 token!</span>
+  </p>
+</div>
+
+<!-- SLIDE 11: BPE Result -->
+<div class="slide" id="s11">
+  <h2>BPE Result</h2>
+  <div style="display: flex; gap: 60px; margin: 30px 0; font-size: 1.5rem;">
+    <div>
+      <h3 class="red" style="margin-bottom: 10px;">Before BPE</h3>
+      <div class="big-text" style="font-size: 3rem;">41 tokens</div>
+    </div>
+    <div>
+      <h3 class="green" style="margin-bottom: 10px;">After BPE</h3>
+      <div class="big-text" style="font-size: 3rem; color: #4caf50;">11 tokens</div>
+    </div>
+  </div>
+  <p style="font-size: 2rem; color: #4caf50;">73% compression! 🎉</p>
+  <p style="font-size: 1.2rem; color: #888; margin-top: 15px;">
+    Issi liye ChatGPT itna zyada text process kar paata hai
+  </p>
+</div>
+
+<!-- SLIDE 12: Comparison Table -->
+<div class="slide" id="s12">
+  <h2>Character vs BPE</h2>
+  <table class="comparison-table">
+    <tr>
+      <th></th>
+      <th class="red">Char Token</th>
+      <th class="green">BPE (GPT-style)</th>
+    </tr>
+    <tr>
+      <td>"Namaste"</td>
+      <td>7 tokens</td>
+      <td>1-2 tokens</td>
+    </tr>
+    <tr>
+      <td>"Mogambo khush hua"</td>
+      <td>18 tokens</td>
+      <td>~5 tokens</td>
+    </tr>
+    <tr>
+      <td>"mera naam hai"</td>
+      <td>13 tokens</td>
+      <td>~3 tokens</td>
+    </tr>
+    <tr>
+      <td>Speed</td>
+      <td class="red">Slow ❌</td>
+      <td class="green">Fast ✅</td>
+    </tr>
+  </table>
+</div>
+
+<!-- SLIDE 13: Key Takeaway -->
+<div class="slide" id="s13">
+  <h2 style="color: #888; font-size: 1.5rem; margin-bottom: 20px;">KEY TAKEAWAY</h2>
+  <div class="big-text" style="font-size: 2.8rem; line-height: 1.4;">
+    Tokenization = Text → Numbers
+  </div>
+  <p style="font-size: 1.6rem; margin-top: 20px;">
+    Computer sirf <span class="red">numbers</span> samajhta hai.<br>
+    Yeh <span class="highlight">FIRST step</span> hai har AI model ka!
+  </p>
+</div>
+
+<!-- SLIDE 14: Cliffhanger -->
+<div class="slide" id="s14">
+  <h2>Lekin ek problem hai...</h2>
+  <div style="margin: 30px 0; font-size: 1.5rem; line-height: 2;">
+    <div class="reveal-item"><span class="highlight">pyaar</span> = token 42</div>
+    <div class="reveal-item"><span class="highlight">mohabbat</span> = token 51</div>
+    <div class="reveal-item"><span class="highlight">rocket</span> = token 89</div>
+  </div>
+  <p class="reveal-item" style="font-size: 1.4rem; margin-top: 20px;">
+    <span class="green">pyaar</span> aur <span class="green">mohabbat</span> SIMILAR hain...
+    lekin <span class="red">rocket</span> nahi.
+  </p>
+  <p class="reveal-item" style="font-size: 1.6rem; margin-top: 15px; color: #ffcc00;">
+    Computer ko yeh kaise samjhaye?
+  </p>
+</div>
+
+<!-- SLIDE 15: Next Episode -->
+<div class="slide" id="s15">
+  <p style="font-size: 1.5rem; color: #888;">Yeh raaz...</p>
+  <div class="next-ep">
+    Episode 3: 20 Lines Mein AI!
+  </div>
+  <p style="font-size: 1.2rem; color: #666; margin-top: 30px;">AI Ka Raaz &nbsp;|&nbsp; Season 1</p>
+</div>
+
+<div class="slide-counter" id="counter">1 / 15</div>
+<div class="controls"><kbd>←</kbd> <kbd>→</kbd> to navigate &nbsp;|&nbsp; <kbd>F</kbd> fullscreen</div>
+
+<script>
+  let current = 0;
+  const slides = document.querySelectorAll('.slide');
+  const counter = document.getElementById('counter');
+  const total = slides.length;
+  function showSlide(n) {
+    slides[current].classList.remove('active');
+    current = (n + total) % total;
+    slides[current].classList.remove('active');
+    void slides[current].offsetWidth;
+    slides[current].classList.add('active');
+    counter.textContent = `${current + 1} / ${total}`;
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') showSlide(current + 1);
+    if (e.key === 'ArrowLeft') showSlide(current - 1);
+    if (e.key === 'f') document.documentElement.requestFullscreen();
+  });
+  document.addEventListener('click', () => showSlide(current + 1));
+</script>
+</body>
+</html>

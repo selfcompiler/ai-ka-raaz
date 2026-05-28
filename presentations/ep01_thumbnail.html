@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1280px;
+    height: 720px;
+    background: linear-gradient(135deg, #0a0a1a 0%, #1a0a2e 50%, #0a1a2e 100%);
+    display: flex;
+    overflow: hidden;
+    font-family: 'Arial Black', 'Segoe UI', system-ui, sans-serif;
+    position: relative;
+  }
+
+  .left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 50px 40px 50px 60px;
+    z-index: 2;
+  }
+
+  .title-line1 {
+    font-size: 72px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.1;
+    text-shadow: 3px 3px 15px rgba(0,0,0,0.8);
+  }
+  .title-line2 {
+    font-size: 80px;
+    font-weight: 900;
+    color: #ffcc00;
+    line-height: 1.1;
+    text-shadow: 3px 3px 15px rgba(0,0,0,0.8), 0 0 30px rgba(255,204,0,0.3);
+    margin-top: 5px;
+  }
+
+  .subtitle {
+    margin-top: 25px;
+    font-size: 28px;
+    color: #ff4444;
+    font-weight: 800;
+    background: rgba(255,68,68,0.15);
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 8px;
+    border: 2px solid rgba(255,68,68,0.4);
+  }
+
+  .code-box {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.7);
+    border: 2px solid #333;
+    border-radius: 12px;
+    padding: 25px 30px;
+    font-family: 'Courier New', monospace;
+    font-size: 20px;
+    line-height: 1.8;
+    color: #4caf50;
+    width: 420px;
+    z-index: 2;
+    box-shadow: 0 0 40px rgba(76,175,80,0.2);
+  }
+  .code-box .comment { color: #666; }
+  .code-box .keyword { color: #ff79c6; }
+  .code-box .string { color: #f1fa8c; }
+  .code-box .output { color: #ff4444; font-weight: bold; }
+  .code-box .output2 { color: #4caf50; font-weight: bold; }
+
+  .badge {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    background: #ff0000;
+    color: #fff;
+    font-size: 22px;
+    font-weight: 900;
+    padding: 8px 25px;
+    border-radius: 8px;
+    z-index: 3;
+    box-shadow: 0 4px 15px rgba(255,0,0,0.4);
+  }
+
+  .ep-badge {
+    position: absolute;
+    bottom: 30px;
+    left: 60px;
+    color: #888;
+    font-size: 20px;
+    font-weight: 700;
+    z-index: 3;
+  }
+  .ep-badge span { color: #ffcc00; }
+
+  .glow-circle {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255,204,0,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    top: 10%;
+    left: 20%;
+    z-index: 1;
+  }
+  .glow-circle2 {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(76,175,80,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    bottom: 10%;
+    right: 15%;
+    z-index: 1;
+  }
+
+  .emoji {
+    position: absolute;
+    bottom: 25px;
+    right: 40px;
+    font-size: 50px;
+    z-index: 3;
+  }
+</style>
+</head>
+<body>
+
+<div class="glow-circle"></div>
+<div class="glow-circle2"></div>
+
+<div class="badge">EPISODE 1</div>
+
+<div class="left">
+  <div class="title-line1">AI SOCHTA</div>
+  <div class="title-line2">NAHI HAI! 🤯</div>
+  <div class="subtitle">2 SEC MEIN AI BANAYA!</div>
+</div>
+
+<div class="code-box">
+  <span class="comment"># Before Training:</span><br>
+  <span class="output">xqzjjj bYRGkF?!</span><br><br>
+  <span class="comment"># After Training:</span><br>
+  <span class="output2">Mere paas maa hai...</span><br>
+  <span class="output2">Mogambo khush hua</span><br><br>
+  <span class="keyword">Parameters:</span> <span class="string">4,225</span><br>
+  <span class="keyword">GPT-4:</span> <span class="string">1,800,000,000,000</span>
+</div>
+
+<div class="ep-badge"><span>AI KA RAAZ</span> | Zero to Hero</div>
+<div class="emoji">🎬</div>
+
+</body>
+</html>
