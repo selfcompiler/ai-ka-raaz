@@ -54,7 +54,7 @@
 ---
 
 ### 💡 THE REVEAL (2:00 - 4:30)
-*(Switch to terminal/code editor)*
+*(Switch to terminal/code editor — PyCharm)*
 
 **Narration:**
 > "Believe nahi ho raha? Thik hai. Main dikhata hoon."
@@ -63,9 +63,9 @@
 >
 > *(Show the script — highlight it's only ~30 lines)*
 >
-> "Yeh script sirf 30 lines ki hai. Isne Shakespeare padha hai. Aur ab yeh Shakespeare **JAISI** cheezein likhegi."
+> "Yeh script sirf 30 lines ki hai. Isne **Bollywood dialogues** padhe hain — 1,760 movies se! Aur ab yeh khud dialogues likhegi."
 
-*(Run ep01_ai_thinks.py)*
+*(Run ep01_ai_thinks.py — press ENTER step by step)*
 
 > "Pehle dekhte hain BINA training ke kya likha..."
 
@@ -73,24 +73,24 @@
 
 > "😂 Gibberish. Random letters. AI ko kuch nahi aata abhi."
 >
-> "Ab train karte hain... sirf 5 second..."
+> "Ab train karte hain... sirf 2 second..."
 
 *(Show training progress: loss going down)*
 
-> "Loss dekho — 4.5... 3.2... 2.8... 2.5... Matlab AI **seekh** raha hai!"
+> "Loss dekho — 2.45... 2.29... 2.24... Matlab AI **seekh** raha hai!"
 >
 > "Ab dekhte hain training ke BAAD:"
 
-*(Show generated Shakespeare-like text)*
+*(Show generated Bollywood-like text)*
 
-> "WHOA! 'The king shall not...' 'My lord, I pray...' — yeh toh Shakespeare jaisa hai!"
+> "WHOA! 'ha ban ka'... 'ke saath mar'... 'kaho hai'... — yeh toh Hindi jaisa hai!"
 >
-> "Lekin AI ne Shakespeare **PADHA** nahi. Samjha nahi. Usne sirf yeh seekha:"
+> "Lekin AI ne Hindi **SEEKHI** nahi. Samjha nahi. Usne sirf yeh seekha:"
 >
 > **(On screen):**
-> - 'T' ke baad usually 'h' aata hai
-> - 'Th' ke baad 'e' aata hai
-> - 'The' ke baad space aata hai
+> - 'M' ke baad usually 'a' aata hai (Main, Maa, Marte)
+> - 'k' ke baad 'a' ya 'h' aata hai (kya, kaha, kaho)
+> - Space ke baad 'h' ya 'k' aata hai (hai, kya, karna)
 >
 > "**Pattern. Bas pattern.** Ek ke baad ek character predict karo."
 

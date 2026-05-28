@@ -1,17 +1,26 @@
 """
 🎬 AI Ka Raaz — Episode 1: "AI Sochta Kaise Hai?"
-A tiny AI that learns to write like Shakespeare — in 5 seconds!
+A tiny AI that learns Bollywood dialogues — in 5 seconds!
 
 Run: python ep01_ai_thinks.py
 """
 import torch
+import torch.nn as nn
 import torch.nn.functional as F
 import time, os
 
-# --- STEP 1: Load Shakespeare ---
-data_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'shakespeare.txt')
+# ============================================================
+# STEP 1: Load Bollywood Dialogues
+# ============================================================
+print("=" * 60)
+print("🤖 AI KA RAAZ — Episode 1")
+print("=" * 60)
+
+input("\n👉 Step 1: Bollywood dialogues load karte hain... [ENTER]")
+
+data_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'bollywood.txt')
 if not os.path.exists(data_path):
-    data_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'shakespeare.txt')
+    data_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'bollywood.txt')
 text = open(data_path).read()
 
 chars = sorted(set(text))
@@ -23,10 +32,16 @@ decode = lambda l: ''.join(itos[i] for i in l)
 
 data = torch.tensor(encode(text), dtype=torch.long)
 
-# --- STEP 2: The World's Simplest AI (Bigram Model) ---
-torch.manual_seed(42)
+print(f"\n🎬 Bollywood dialogues loaded: {len(text):,} characters")
+print(f"🎭 From 1,760 movies!")
+print(f"📝 Vocabulary: {vocab_size} unique characters")
 
-import torch.nn as nn
+# ============================================================
+# STEP 2: Build the AI
+# ============================================================
+input("\n👉 Step 2: AI model banate hain... [ENTER]")
+
+torch.manual_seed(42)
 
 class TinyAI(nn.Module):
     def __init__(self, vocab_size):
@@ -37,7 +52,15 @@ class TinyAI(nn.Module):
         return self.table(x)
 
 model = TinyAI(vocab_size)
+n_params = sum(p.numel() for p in model.parameters())
 
+print(f"\n🧠 TinyAI ready!")
+print(f"   Brain = ek table of {vocab_size} x {vocab_size} = {n_params:,} numbers")
+print(f"   Abhi sab numbers RANDOM hain — AI ko kuch nahi aata!")
+
+# ============================================================
+# STEP 3: Generate BEFORE training (gibberish)
+# ============================================================
 def generate(num_chars=200):
     idx = torch.zeros(1, dtype=torch.long)
     result = []
@@ -50,24 +73,21 @@ def generate(num_chars=200):
             idx = torch.cat([idx, next_idx])
     return decode(result)
 
-# --- STEP 3: Show BEFORE training ---
-print("=" * 60)
-print("🤖 AI KA RAAZ — Episode 1")
-print("=" * 60)
-print()
-print("📖 Shakespeare loaded:", f"{len(text):,} characters")
-print(f"📝 Vocabulary: {vocab_size} unique characters")
-print()
+input("\n👉 Step 3: Dekhte hain BINA training ke AI kya likhta hai... [ENTER]")
 
-print("─" * 60)
-print("❌ BEFORE TRAINING (AI ko kuch nahi aata!):")
+print("\n" + "─" * 60)
+print("❌ BEFORE TRAINING:")
 print("─" * 60)
 print(generate(200))
-print()
+print("\n😂 Gibberish! Random letters! AI ko kuch nahi aata!")
 
-# --- STEP 4: Train! ---
-print("─" * 60)
-print("🏋️ TRAINING SHURU... (sirf 5 seconds!)")
+# ============================================================
+# STEP 4: Train the AI
+# ============================================================
+input("\n👉 Step 4: Ab TRAIN karte hain... [ENTER]")
+
+print("\n" + "─" * 60)
+print("🏋️ TRAINING SHURU...")
 print("─" * 60)
 
 batch_size = 256
@@ -94,20 +114,24 @@ for step in range(1, num_steps + 1):
         print(f"  Step {step:>5} | Loss: {loss.item():.2f} | [{bar}] {elapsed:.1f}s")
 
 elapsed = time.time() - start
-n_params = sum(p.numel() for p in model.parameters())
 print(f"\n✅ Training complete! ({elapsed:.1f} seconds)")
-print(f"   Parameters: {n_params:,} (that's it!)")
 
-# --- STEP 5: Show AFTER training ---
-print()
-print("─" * 60)
-print("✅ AFTER TRAINING (AI ne Shakespeare SEEKH liya!):")
+# ============================================================
+# STEP 5: Generate AFTER training
+# ============================================================
+input("\n👉 Step 5: Ab dekhte hain training ke BAAD... [ENTER]")
+
+print("\n" + "─" * 60)
+print("✅ AFTER TRAINING (AI ne Bollywood SEEKH liya!):")
 print("─" * 60)
 print(generate(300))
-print()
 
-# --- STEP 6: The Big Reveal ---
-print("=" * 60)
+# ============================================================
+# STEP 6: What did AI learn?
+# ============================================================
+input("\n👉 Step 6: AI ne kya seekha? Dekhte hain... [ENTER]")
+
+print("\n" + "=" * 60)
 print("🧠 KYA SEEKHA AI NE?")
 print("=" * 60)
 print()
@@ -117,7 +141,9 @@ print()
 
 top_k = 5
 with torch.no_grad():
-    for ch in ['T', 'h', ' ']:
+    for ch in ['M', 'a', ' ']:
+        if ch not in stoi:
+            continue
         idx = stoi[ch]
         logits = model(torch.tensor([idx]))
         probs = F.softmax(logits[0], dim=0)
@@ -126,12 +152,19 @@ with torch.no_grad():
         display = ch if ch != ' ' else '␣'
         print(f"  '{display}' ke baad → {', '.join(predictions)}")
 
-print()
-print("─" * 60)
+# ============================================================
+# STEP 7: The Big Comparison
+# ============================================================
+input("\n👉 Step 7: Ab asli twist... [ENTER]")
+
+print("\n" + "─" * 60)
 print("💡 KEY INSIGHT:")
-print("   ChatGPT BHI yahi karta hai — NEXT token predict karo.")
-print("   Bas scale alag hai:")
-print(f"   • Humara model:  {vocab_size * vocab_size:,} parameters")
+print("─" * 60)
+print(f"   ChatGPT BHI yahi karta hai — NEXT token predict karo.")
+print(f"   Bas scale alag hai:")
+print(f"")
+print(f"   • Humara model:  {n_params:,} parameters")
 print(f"   • GPT-4:         1,800,000,000,000 parameters")
-print("   Same concept. Fark sirf SIZE ka hai! 🚀")
+print(f"")
+print(f"   Same concept. Fark sirf SIZE ka hai! 🚀")
 print("─" * 60)
